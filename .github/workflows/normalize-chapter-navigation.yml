@@ -1,0 +1,39 @@
+name: Normalize Chapter Navigation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/normalize_chapter_navigation.py'
+      - '.github/workflows/normalize-chapter-navigation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  normalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Normalize chapter navigation
+        run: python scripts/normalize_chapter_navigation.py
+
+      - name: Commit navigation updates
+        run: |
+          if git diff --quiet; then
+            echo "No navigation changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add blog/chapter*/chapter*.md
+          git commit -m "docs: normalize chapter navigation"
+          git push
