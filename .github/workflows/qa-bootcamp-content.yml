@@ -1,0 +1,30 @@
+name: QA Bootcamp Content
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'README.md'
+      - 'blog/**'
+      - 'images/**'
+      - 'scripts/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Chapter 00-12 content QA
+        run: python scripts/qa_bootcamp_content.py
