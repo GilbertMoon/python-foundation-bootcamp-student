@@ -5,6 +5,16 @@
 이 과정은 Python 문법을 다시 암기하는 데 목적이 있지 않습니다.
 문제를 이해하고, 구조를 찾고, 작은 단계로 나누고, 직접 구현하고, 오류를 단서로 수정하는 **문제 해결 사고**를 훈련합니다.
 
+## 수업 시작 전 먼저 읽기
+
+- **[Python Foundation Bootcamp — 학습 진행 가이드](COURSE_GUIDE.md)**
+  - Chapter 00 사전 준비
+  - 6회차 수업 배치표
+  - 매 수업의 문제 해결 루틴
+  - AI / Python 공식 문서 사용 규칙
+  - Final Challenge 수행 순서
+  - 이후 Database · SQL · pandas · Data Analysis 연결
+
 ## 강의안
 
 - [Chapter 00. 시작하기 전에 — Python 기본 도구를 손에 익히기](blog/chapter00/chapter00.md)
@@ -23,6 +33,7 @@
 
 ## 폴더
 
+- 전체 학습 진행 가이드: `COURSE_GUIDE.md`
 - 강의안: `blog/`
 - 공개 이미지: `images/`
 - 이미지 자동 생성 스크립트: `scripts/`
