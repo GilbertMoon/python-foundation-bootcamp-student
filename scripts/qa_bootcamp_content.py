@@ -25,6 +25,7 @@ EXPECTED_TITLES = {
 }
 
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
+LESSON_LINK_RE = re.compile(r"\(blog/chapter\d{2}/chapter\d{2}\.md\)")
 errors: list[str] = []
 checks = 0
 
@@ -125,6 +126,10 @@ if readme_path.exists():
             lesson_path in readme,
             f"[README] missing lesson link for Chapter {chapter_id}: {lesson_path}",
         )
+    check(
+        len(LESSON_LINK_RE.findall(readme)) == 13,
+        f"[README] expected exactly 13 lesson links, found {len(LESSON_LINK_RE.findall(readme))}",
+    )
     check(
         "python-foundation-bootcamp-assets" not in readme,
         "[README] obsolete assets repository reference remains",
