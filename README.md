@@ -7,6 +7,13 @@
 
 ## 수업 시작 전 먼저 읽기
 
+- **[Python Foundation Bootcamp — 수업 시작 안내](CLASS_START_NOTICE.md)**
+  - 첫 수업 전 Chapter 00 준비
+  - 무자료 Memory Coding 준비
+  - 실행 전 예상과 디버깅 방식
+  - AI / 검색 / Python 공식 문서 사용 순서
+  - 6회차 전체 일정과 워크시트 사용법
+
 - **[Python Foundation Bootcamp — 학습 진행 가이드](COURSE_GUIDE.md)**
   - Chapter 00 사전 준비
   - 6회차 수업 배치표
@@ -44,6 +51,7 @@
 
 ## 폴더
 
+- 수업 시작 안내: `CLASS_START_NOTICE.md`
 - 전체 학습 진행 가이드: `COURSE_GUIDE.md`
 - 강의안: `blog/`
 - 공개 이미지: `images/`
