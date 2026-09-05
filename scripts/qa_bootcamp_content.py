@@ -114,11 +114,16 @@ for chapter in range(13):
     check(workflow.exists(), f"[Chapter {chapter_id}] missing image generation workflow")
 
 
-# 2) Public README should expose all student lesson chapters, not only Chapter 00.
+# 2) Public README should expose the course guide and all student lesson chapters.
 readme_path = ROOT / "README.md"
 check(readme_path.exists(), "README.md is missing")
+readme = ""
 if readme_path.exists():
     readme = readme_path.read_text(encoding="utf-8")
+    check(
+        "COURSE_GUIDE.md" in readme,
+        "[README] missing link to COURSE_GUIDE.md",
+    )
     for chapter in range(13):
         chapter_id = f"{chapter:02d}"
         lesson_path = f"blog/chapter{chapter_id}/chapter{chapter_id}.md"
@@ -136,7 +141,38 @@ if readme_path.exists():
     )
 
 
-# 3) Public lesson Markdown must not contain stale private/old asset repository paths.
+# 3) Student course guide must exist and cover the full six-session learning path.
+guide_path = ROOT / "COURSE_GUIDE.md"
+check(guide_path.exists(), "COURSE_GUIDE.md is missing")
+if guide_path.exists():
+    guide = guide_path.read_text(encoding="utf-8")
+    check(
+        guide.startswith("# Python Foundation Bootcamp — 학습 진행 가이드"),
+        "[COURSE_GUIDE] unexpected or missing main title",
+    )
+    for session in range(1, 7):
+        check(
+            f"{session}회차" in guide,
+            f"[COURSE_GUIDE] missing session label: {session}회차",
+        )
+    for chapter in range(13):
+        chapter_id = f"{chapter:02d}"
+        lesson_path = f"blog/chapter{chapter_id}/chapter{chapter_id}.md"
+        check(
+            lesson_path in guide,
+            f"[COURSE_GUIDE] missing Chapter {chapter_id} link: {lesson_path}",
+        )
+    check("Final Challenge" in guide, "[COURSE_GUIDE] missing Final Challenge guidance")
+    check("Python 공식 문서" in guide, "[COURSE_GUIDE] missing official-docs usage guidance")
+    check("AI" in guide, "[COURSE_GUIDE] missing AI usage guidance")
+    check("Database" in guide and "SQL" in guide and "pandas" in guide, "[COURSE_GUIDE] missing next-course data bridge")
+    check(
+        "python-foundation-bootcamp-assets" not in guide,
+        "[COURSE_GUIDE] obsolete assets repository reference remains",
+    )
+
+
+# 4) Public lesson Markdown must not contain stale private/old asset repository paths.
 for md_path in sorted((ROOT / "blog").glob("chapter*/chapter*.md")):
     text = md_path.read_text(encoding="utf-8")
     check(
@@ -152,4 +188,4 @@ if errors:
         print(f"{index:02d}. {error}")
     sys.exit(1)
 
-print("QA PASSED: Chapter 00-12 content, images, links, generators, workflows, and README are consistent.")
+print("QA PASSED: Chapter 00-12 content, images, links, generators, workflows, README, and COURSE_GUIDE are consistent.")
