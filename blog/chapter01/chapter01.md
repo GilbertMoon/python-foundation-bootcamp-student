@@ -876,3 +876,11 @@ Python 코드
 > **문법을 외우는 사람에서, 문제의 구조를 찾는 사람으로.**
 
 이것이 Python Foundation Bootcamp의 첫 번째 문제 해결 습관입니다.
+
+---
+
+## 다음 Chapter — Chapter 02
+
+다음은 [Chapter 02. 문제를 실행 가능한 작은 단계로 나누기](../chapter02/chapter02.md)입니다.
+
+지금까지 익힌 내용을 다음 문제 해결 단계로 연결해 보세요.
