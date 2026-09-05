@@ -24,8 +24,42 @@ EXPECTED_TITLES = {
     12: "# Chapter 12. 처음 보는 문제를 혼자 해결하기",
 }
 
+EXPECTED_WORKSHEETS = {
+    1: {
+        "date": "2026-09-08",
+        "chapters": "Chapter 01~02",
+        "title": "# Session 01 Worksheet — 문제의 구조를 찾고 작은 단계로 나누기",
+    },
+    2: {
+        "date": "2026-09-10",
+        "chapters": "Chapter 03~04",
+        "title": "# Session 02 Worksheet — 판단 기준과 반복되는 일을 발견하기",
+    },
+    3: {
+        "date": "2026-09-15",
+        "chapters": "Chapter 05~06",
+        "title": "# Session 03 Worksheet — 필요한 데이터만 선택하고 하나의 결과 만들기",
+    },
+    4: {
+        "date": "2026-09-17",
+        "chapters": "Chapter 07~08",
+        "title": "# Session 04 Worksheet — 현실 데이터를 구조화하고 여러 조건 함께 다루기",
+    },
+    5: {
+        "date": "2026-09-22",
+        "chapters": "Chapter 09~10",
+        "title": "# Session 05 Worksheet — 큰 문제를 작은 함수로 나누고 다시 연결하기",
+    },
+    6: {
+        "date": "2026-09-24",
+        "chapters": "Chapter 11~12",
+        "title": "# Session 06 Worksheet — 오류를 단서로 읽고 처음 보는 문제를 혼자 해결하기",
+    },
+}
+
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
 LESSON_LINK_RE = re.compile(r"\(blog/chapter\d{2}/chapter\d{2}\.md\)")
+WORKSHEET_LINK_RE = re.compile(r"\(worksheets/session\d{2}\.md\)")
 errors: list[str] = []
 checks = 0
 
@@ -144,6 +178,7 @@ if readme_path.exists():
 # 3) Student course guide must exist and cover the full six-session learning path.
 guide_path = ROOT / "COURSE_GUIDE.md"
 check(guide_path.exists(), "COURSE_GUIDE.md is missing")
+guide = ""
 if guide_path.exists():
     guide = guide_path.read_text(encoding="utf-8")
     check(
@@ -172,7 +207,57 @@ if guide_path.exists():
     )
 
 
-# 4) Public lesson Markdown must not contain stale private/old asset repository paths.
+# 4) Student worksheets must exist, match the session schedule, and be linked from both guides.
+for session, expected in EXPECTED_WORKSHEETS.items():
+    session_id = f"{session:02d}"
+    relative_path = f"worksheets/session{session_id}.md"
+    worksheet_path = ROOT / relative_path
+    check(
+        worksheet_path.exists(),
+        f"[Session {session_id}] missing worksheet: {relative_path}",
+    )
+    if not worksheet_path.exists():
+        continue
+
+    worksheet = worksheet_path.read_text(encoding="utf-8")
+    lines = worksheet.splitlines()
+    first_line = lines[0].strip() if lines else ""
+    check(
+        first_line == expected["title"],
+        f"[Session {session_id}] worksheet title mismatch: {first_line!r}",
+    )
+    check(
+        f"**수업일:** {expected['date']}" in worksheet,
+        f"[Session {session_id}] expected class date {expected['date']} not found",
+    )
+    check(
+        f"**대상 Chapter:** {expected['chapters']}" in worksheet,
+        f"[Session {session_id}] expected chapter range {expected['chapters']} not found",
+    )
+    check(
+        relative_path in readme,
+        f"[README] missing worksheet link for Session {session_id}: {relative_path}",
+    )
+    check(
+        relative_path in guide,
+        f"[COURSE_GUIDE] missing worksheet link for Session {session_id}: {relative_path}",
+    )
+    check(
+        "python-foundation-bootcamp-assets" not in worksheet,
+        f"[Session {session_id}] obsolete assets repository reference remains",
+    )
+
+check(
+    len(WORKSHEET_LINK_RE.findall(readme)) == 6,
+    f"[README] expected exactly 6 worksheet links, found {len(WORKSHEET_LINK_RE.findall(readme))}",
+)
+check(
+    len(WORKSHEET_LINK_RE.findall(guide)) == 6,
+    f"[COURSE_GUIDE] expected exactly 6 worksheet links, found {len(WORKSHEET_LINK_RE.findall(guide))}",
+)
+
+
+# 5) Public lesson Markdown must not contain stale private/old asset repository paths.
 for md_path in sorted((ROOT / "blog").glob("chapter*/chapter*.md")):
     text = md_path.read_text(encoding="utf-8")
     check(
@@ -188,4 +273,7 @@ if errors:
         print(f"{index:02d}. {error}")
     sys.exit(1)
 
-print("QA PASSED: Chapter 00-12 content, images, links, generators, workflows, README, and COURSE_GUIDE are consistent.")
+print(
+    "QA PASSED: Chapter 00-12 content, images, links, generators, workflows, "
+    "README, COURSE_GUIDE, and Session 01-06 worksheets are consistent."
+)
