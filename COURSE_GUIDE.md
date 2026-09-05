@@ -99,6 +99,19 @@ for student in students:
 
 > 일정은 운영 상황에 따라 조정할 수 있지만, **Chapter의 학습 순서는 유지**하는 것을 권장합니다.
 
+## 회차별 학생 워크시트
+
+각 수업에서는 해당 Chapter 강의안과 함께 학생용 워크시트를 사용합니다. 워크시트의 빈 분석표와 예측·디버깅 기록을 먼저 작성한 뒤 코드를 구현합니다.
+
+| 회차 | 수업일 | 대상 Chapter | 학생용 워크시트 |
+| --- | --- | --- | --- |
+| 1회차 | 2026-09-08 | Chapter 01~02 | [Session 01. 문제의 구조를 찾고 작은 단계로 나누기](worksheets/session01.md) |
+| 2회차 | 2026-09-10 | Chapter 03~04 | [Session 02. 판단 기준과 반복되는 일을 발견하기](worksheets/session02.md) |
+| 3회차 | 2026-09-15 | Chapter 05~06 | [Session 03. 필요한 데이터만 선택하고 하나의 결과 만들기](worksheets/session03.md) |
+| 4회차 | 2026-09-17 | Chapter 07~08 | [Session 04. 현실 데이터를 구조화하고 여러 조건 함께 다루기](worksheets/session04.md) |
+| 5회차 | 2026-09-22 | Chapter 09~10 | [Session 05. 큰 문제를 작은 함수로 나누고 다시 연결하기](worksheets/session05.md) |
+| 6회차 | 2026-09-24 | Chapter 11~12 | [Session 06. 오류를 단서로 읽고 처음 보는 문제를 혼자 해결하기](worksheets/session06.md) |
+
 ---
 
 # 4. 매 수업에서 반복할 표준 학습 루틴

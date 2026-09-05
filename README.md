@@ -31,6 +31,17 @@
 - [Chapter 11. 오류는 실패가 아니라 단서다](blog/chapter11/chapter11.md)
 - [Chapter 12. 처음 보는 문제를 혼자 해결하기](blog/chapter12/chapter12.md)
 
+## 실습 워크시트
+
+각 회차 수업에서는 강의안과 함께 아래 학생용 워크시트를 사용합니다. 워크시트는 완성 정답보다 문제 분석, 실행 전 예상, 직접 구현, 디버깅 기록과 회고를 중심으로 구성되어 있습니다.
+
+- [Session 01. 문제의 구조를 찾고 작은 단계로 나누기](worksheets/session01.md) — 2026-09-08 · Chapter 01~02
+- [Session 02. 판단 기준과 반복되는 일을 발견하기](worksheets/session02.md) — 2026-09-10 · Chapter 03~04
+- [Session 03. 필요한 데이터만 선택하고 하나의 결과 만들기](worksheets/session03.md) — 2026-09-15 · Chapter 05~06
+- [Session 04. 현실 데이터를 구조화하고 여러 조건 함께 다루기](worksheets/session04.md) — 2026-09-17 · Chapter 07~08
+- [Session 05. 큰 문제를 작은 함수로 나누고 다시 연결하기](worksheets/session05.md) — 2026-09-22 · Chapter 09~10
+- [Session 06. 오류를 단서로 읽고 처음 보는 문제를 혼자 해결하기](worksheets/session06.md) — 2026-09-24 · Chapter 11~12
+
 ## 폴더
 
 - 전체 학습 진행 가이드: `COURSE_GUIDE.md`
