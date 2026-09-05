@@ -1,6 +1,7 @@
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
+# Touch marker: workflow trigger for Chapter 00 public image generation.
 OUT = Path('images/chapter00')
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -54,7 +55,6 @@ def image_toolbox():
     d.text((90, 65), 'Python 기본 도구 상자', font=font(72, True), fill=NAVY)
     d.text((92, 150), '이미 배운 도구를 언제 꺼낼지 연습합니다.', font=font(34), fill=GRAY)
 
-    # toolbox body
     rr(d, (100, 260, 1500, 700), 38, '#2F6E9F')
     rr(d, (135, 300, 1465, 640), 28, '#204C72')
     tools = [
