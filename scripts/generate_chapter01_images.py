@@ -77,7 +77,6 @@ def image_two_approaches():
     center(d, (110, 265, 725, 330), '방법 A  |  문제 → 바로 코드', font(34, True), RED)
     center(d, (875, 265, 1490, 330), '방법 B  |  문제 → 구조 → 코드', font(34, True), GREEN)
 
-    # 왼쪽: 문제 → 바로 코드 → 막힘 → 질문
     left_boxes = [
         ('문제', LIGHT_BLUE, BLUE, 360),
         ('바로 코드 작성', LIGHT_YELLOW, YELLOW, 475),
@@ -92,7 +91,6 @@ def image_two_approaches():
     rr(d, (210, 690, 625, 738), 18, WHITE, RED, 2)
     center(d, (225, 692, 610, 736), '“어떤 문법을 써야 하지?”', font(25, True), RED)
 
-    # 오른쪽: 문제 → 데이터 → 반복 ↓ 조건 → 결과 → 코드 (지그재그)
     top = [
         ('문제', LIGHT_BLUE, BLUE, 870),
         ('데이터', LIGHT_GREEN, GREEN, 1080),
@@ -129,46 +127,72 @@ def image_same_structure():
     d = ImageDraw.Draw(img)
     title(d, '문제는 달라도 구조는 같습니다', '학생 성적 문제에서 익힌 생각을 쇼핑몰 주문 문제로 옮겨 봅니다.')
 
-    rr(d, (70, 240, 590, 720), 34, LIGHT_BLUE, BLUE, 4)
-    center(d, (100, 265, 560, 325), '학생 성적 문제', font(36, True), BLUE)
-    students = [('민수', '85'), ('지영', '72'), ('현우', '91')]
-    y = 360
-    for name, score in students:
-        rr(d, (135, y, 525, y+82), 22, WHITE, BLUE, 2)
-        d.text((165, y+20), name, font=font(29, True), fill=NAVY)
-        d.text((350, y+20), f'{score}점', font=font(29, True), fill=NAVY)
-        y += 105
-    rr(d, (155, 665, 505, 705), 18, WHITE)
-    center(d, (160, 665, 500, 705), '80점 이상 → 합격', font(25, True), RED)
+    # 왼쪽: 학생 성적 문제
+    rr(d, (40, 215, 520, 760), 34, LIGHT_BLUE, BLUE, 4)
+    center(d, (75, 238, 485, 300), '학생 성적 문제', font(38, True), BLUE)
+    rr(d, (145, 318, 415, 365), 18, '#D7ECFF')
+    center(d, (150, 320, 410, 362), '점수 데이터', font(25, True), NAVY)
 
-    rr(d, (625, 250, 975, 710), 34, WHITE, PURPLE, 4)
-    center(d, (655, 270, 945, 325), '공통 구조', font(35, True), PURPLE)
-    steps = ['여러 대상', '하나씩 확인', '기준 비교', '결과 표시']
-    sy = 365
-    for i, s in enumerate(steps):
-        rr(d, (690, sy, 910, sy+68), 22, LIGHT_PURPLE, PURPLE, 3)
-        center(d, (700, sy+3, 900, sy+65), s, font(27, True), NAVY)
+    students = [('민수', '85점'), ('지영', '72점'), ('현우', '91점')]
+    y = 390
+    for name, score in students:
+        rr(d, (78, y, 482, y+82), 22, WHITE, BLUE, 2)
+        d.text((110, y+19), name, font=font(29, True), fill=NAVY)
+        d.text((330, y+19), score, font=font(29, True), fill=NAVY)
+        y += 105
+
+    rr(d, (80, 700, 480, 742), 18, WHITE)
+    center(d, (90, 701, 470, 741), '80점 이상 → 합격', font(25, True), RED)
+
+    # 가운데: 가장 중요한 공통 구조
+    rr(d, (555, 205, 1045, 770), 34, '#FBF9FF', PURPLE, 5)
+    center(d, (590, 230, 1010, 302), '공통 구조', font(43, True), PURPLE)
+
+    steps = [
+        ('여러 대상', '반복할 대상들'),
+        ('하나씩 확인', '반복'),
+        ('조건 판단', '조건'),
+        ('결과 표시', '결과'),
+    ]
+    sy = 335
+    for i, (label, tag) in enumerate(steps):
+        rr(d, (610, sy, 900, sy+78), 22, WHITE, PURPLE, 3)
+        center(d, (625, sy+4, 885, sy+74), label, font(29, True), NAVY)
+        rr(d, (918, sy+15, 1005, sy+63), 19, LIGHT_PURPLE)
+        center(d, (922, sy+16, 1001, sy+62), tag, font(19, True), PURPLE)
         if i < len(steps)-1:
-            arrow_down(d, 800, sy+68, sy+105, PURPLE, 8)
+            arrow_down(d, 755, sy+78, sy+105, PURPLE, 8)
         sy += 105
 
-    rr(d, (1010, 240, 1530, 720), 34, LIGHT_GREEN, GREEN, 4)
-    center(d, (1040, 265, 1500, 325), '쇼핑몰 주문 문제', font(36, True), GREEN)
-    orders = [('민수', '45,000'), ('지영', '72,000'), ('현우', '53,000')]
-    y = 360
+    # 오른쪽: 쇼핑몰 주문 문제
+    rr(d, (1080, 215, 1560, 760), 34, LIGHT_GREEN, GREEN, 4)
+    center(d, (1110, 238, 1530, 300), '쇼핑몰 주문 문제', font(38, True), GREEN)
+    rr(d, (1180, 318, 1460, 365), 18, '#D9F5E9')
+    center(d, (1185, 320, 1455, 362), '주문 금액 데이터', font(24, True), NAVY)
+
+    orders = [('민수', '45,000원'), ('지영', '72,000원'), ('현우', '53,000원')]
+    y = 390
     for name, amount in orders:
-        rr(d, (1075, y, 1465, y+82), 22, WHITE, GREEN, 2)
-        d.text((1105, y+20), name, font=font(29, True), fill=NAVY)
-        d.text((1260, y+20), f'{amount}원', font=font(27, True), fill=NAVY)
+        rr(d, (1118, y, 1522, y+82), 22, WHITE, GREEN, 2)
+        d.text((1150, y+19), name, font=font(29, True), fill=NAVY)
+        d.text((1320, y+19), amount, font=font(27, True), fill=NAVY)
         y += 105
-    rr(d, (1090, 665, 1450, 705), 18, WHITE)
-    center(d, (1095, 665, 1445, 705), '50,000원 이상 → 무료배송', font(24, True), RED)
 
-    arrow_right(d, 590, 480, 625, PURPLE, 8)
-    arrow_right(d, 975, 480, 1010, PURPLE, 8)
+    rr(d, (1120, 700, 1520, 742), 18, WHITE)
+    center(d, (1130, 701, 1510, 741), '50,000원 이상 → 무료배송', font(23, True), RED)
 
-    rr(d, (220, 785, 1380, 850), 28, LIGHT_YELLOW)
-    center(d, (245, 785, 1355, 850), '소재가 바뀌어도 “반복 → 비교 → 결과”라는 사고 구조는 그대로입니다.', font(29, True), NAVY)
+    # 두 사례가 가운데 공통 구조로 수렴하도록 표현
+    arrow_right(d, 520, 485, 552, BLUE, 10)
+    arrow_left(d, 1080, 485, 1048, GREEN, 10)
+
+    rr(d, (130, 800, 1470, 862), 28, LIGHT_YELLOW)
+    center(
+        d,
+        (155, 800, 1445, 862),
+        '소재가 바뀌어도 “반복 → 조건 판단 → 결과”라는 사고 구조는 그대로입니다.',
+        font(30, True),
+        NAVY,
+    )
     save(img, 'same-structure-different-problem.jpg')
 
 
@@ -194,7 +218,6 @@ def image_sentence_breakdown():
         center(d, (x+35, 478, x+260, 532), label, font(29, True), accent)
         center(d, (x+32, 555, x+263, 655), body, font(25, True), NAVY)
 
-    # 문장 → 네 구조 요소 연결
     d.line((800, 365, 800, 410), fill=PURPLE, width=7)
     d.line((237, 410, 1362, 410), fill=PURPLE, width=7)
     for x in (237, 612, 987, 1362):
